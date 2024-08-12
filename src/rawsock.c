@@ -339,8 +339,8 @@ int rawsock_recv_packet(struct Adapter *adapter, unsigned *length,
         );
     if (err == PF_RING_ERROR_NO_PKT_AVAILABLE || hdr.caplen == 0) {
       PFRING.poll(adapter->ring, 1);
-      if (is_tx_done) {
-        LOG(1, "rawsock_recv_packet: poll: tx done, killing rx\n");
+      if (is_rx_done) {
+        LOG(1, "rawsock_recv_packet: poll: is_tx_done, aborting recv\n");
         return 1;
       }
       goto again;
