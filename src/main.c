@@ -1364,6 +1364,7 @@ static int main_scan(struct Masscan *masscan) {
     }
 
     if (time(0) - now >= masscan->wait) {
+      LOG(1, "[+] exiting receive thread: time(0) - now >= masscan->wait\n");
       is_rx_done = 1;
     }
 
