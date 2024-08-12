@@ -339,8 +339,10 @@ int rawsock_recv_packet(struct Adapter *adapter, unsigned *length,
         );
     if (err == PF_RING_ERROR_NO_PKT_AVAILABLE || hdr.caplen == 0) {
       PFRING.poll(adapter->ring, 1);
-      if (is_tx_done)
+      if (is_tx_done) {
+        LOG(1, "rawsock_recv_packet: poll: tx done, killing rx\n");
         return 1;
+      }
       goto again;
     }
     if (err)
@@ -357,6 +359,7 @@ int rawsock_recv_packet(struct Adapter *adapter, unsigned *length,
 
     if (*packet == NULL) {
       if (is_pcap_file) {
+        LOG(1, "pcap: next: packet was NULL, killing tx rx\n");
         // pixie_time_set_offset(10*100000);
         is_tx_done = 1;
         is_rx_done = 1;
