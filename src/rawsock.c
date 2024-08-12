@@ -283,7 +283,7 @@ int rawsock_send_packet(struct Adapter *adapter, const unsigned char *packet,
 
     while (err == PF_RING_ERROR_NO_TX_SLOT_AVAILABLE) {
       err = PFRING.send(adapter->ring, packet, length, (unsigned char)flush);
-      LOG(1, "pfring:xmit: ERROR %d\n", err);
+      LOG(1, "pfring:xmit: SEND %d\n", err);
       if (err > 0) {
         /* Print --packet-trace if debugging */
         if (adapter->is_packet_trace) {
