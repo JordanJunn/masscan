@@ -42,7 +42,7 @@ int PFRING_is_installed(void) {
     if (memcmp(line, "e1000e ", 8) == 0) {
       LOG(2, "pfring: found 'e1000e' driver\n");
     }
-    if (memcmp(line, "mlx5_core", 10) == 0) {
+    if (memcmp(line, "mlx5_core ", 10) == 0) {
       LOG(2, "pfring: found 'mlx5_core' driver\n");
     }
   }
